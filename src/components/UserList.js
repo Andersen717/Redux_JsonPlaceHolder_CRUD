@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
   Modal,
+  Spin,
 } from "antd";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,7 +14,6 @@ import { getUser, editUser, deleteUser } from "../redux/actions/userAction";
 
 import "./UserList.css";
 
-const { confirm } = Modal;
 const EditableCell = ({
   editing,
   dataIndex,
@@ -60,11 +60,14 @@ const UserList = () => {
   const [form] = Form.useForm();
   const [data, setData] = useState();
   const [editingKey, setEditingKey] = useState("");
+  const [deletingKey, setDeletingKey] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const isEditing = (record) => record.key === editingKey;
 
   const users = useSelector((state) => state.user.users);
+  const loading = useSelector((state) => state.user.loading);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -85,12 +88,20 @@ const UserList = () => {
     }
   }, [users]);
 
-  const showModal = () => {
+  if (loading)
+    return (
+      <div className="card-content">
+        <Spin />
+      </div>
+    );
+
+  const showDeleteModal = (key) => {
+    setDeletingKey(key);
     setIsModalOpen(true);
   };
 
   const handleOk = (key) => {
-    handleDelete(key);
+    dispatch(deleteUser(key));
     setIsModalOpen(false);
   };
 
@@ -100,20 +111,17 @@ const UserList = () => {
 
   const edit = (record) => {
     form.setFieldsValue({
+      id: "",
       name: "",
-      age: "",
-      address: "",
+      username: "",
+      email: "",
+      city: "",
       ...record,
     });
     setEditingKey(record.key);
   };
   const cancel = () => {
     setEditingKey("");
-  };
-  const handleDelete = (key) => {
-    // const newData = data.filter((item) => item.key !== key);
-    dispatch(deleteUser(key));
-    // setData(newData);
   };
   const save = async (key) => {
     try {
@@ -130,7 +138,6 @@ const UserList = () => {
         delete resItem.tcity;
         delete resItem.key;
         dispatch(editUser(resItem));
-        // setData(newData);
         setEditingKey("");
       } else {
         newData.push(row);
@@ -162,6 +169,7 @@ const UserList = () => {
       width: "10%",
       editable: true,
       align: "center",
+      sorter: (a, b) => a.username.localeCompare(b.username),
     },
     {
       title: "Email",
@@ -220,22 +228,26 @@ const UserList = () => {
       dataIndex: "delete",
       align: "center",
       width: "20%",
-      render: (_, record) =>
-        data.length >= 1 ? (
+      render: (_, record) => {
+        return data.length >= 1 ? (
           <>
-            <Button className="delete-btn" onClick={showModal}>
+            <Button
+              className="delete-btn"
+              onClick={() => showDeleteModal(record.key)}
+            >
               delete
             </Button>
             <Modal
               title="Delete"
-              open={isModalOpen}
-              onOk={handleOk(record.key)}
+              open={isModalOpen && record.key === deletingKey}
+              onOk={() => handleOk(record.key)}
               onCancel={handleCancel}
             >
               <p>Are you sure delete this user?</p>
             </Modal>
           </>
-        ) : null,
+        ) : null;
+      },
     },
   ];
   const mergedColumns = columns.map((col) => {

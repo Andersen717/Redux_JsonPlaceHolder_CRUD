@@ -3,6 +3,8 @@ import * as actionTypes from "../types";
 
 export const getUser = () => async (dispatch) => {
   try {
+    dispatch({ type: actionTypes.CREATE_USER_REQUEST });
+
     const res = await api("GET", "/");
     const json = await res.json();
     dispatch({
@@ -19,6 +21,8 @@ export const getUser = () => async (dispatch) => {
 
 export const addUser = (formData) => async (dispatch) => {
   try {
+    dispatch({ type: actionTypes.CREATE_USER_REQUEST });
+
     const res = await api("POST", "/", formData);
     const json = await res.json();
 
@@ -36,6 +40,8 @@ export const addUser = (formData) => async (dispatch) => {
 
 export const editUser = (formData) => async (dispatch) => {
   try {
+    dispatch({ type: actionTypes.CREATE_USER_REQUEST });
+
     const res = await api("PUT", `/${formData.id}`, formData);
     const json = await res.json();
     dispatch({
@@ -52,6 +58,8 @@ export const editUser = (formData) => async (dispatch) => {
 
 export const deleteUser = (id) => async (dispatch) => {
   try {
+    dispatch({ type: actionTypes.CREATE_USER_REQUEST });
+
     const res = await api("DELETE", `/${id}`);
     const json = await res.json();
     console.log(json);

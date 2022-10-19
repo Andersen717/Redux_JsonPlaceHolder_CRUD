@@ -10,3 +10,8 @@
   width: 120px;
   height: 40px !important;
 }
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
