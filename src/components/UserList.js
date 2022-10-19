@@ -72,7 +72,7 @@ const UserList = () => {
 
   useEffect(() => {
     dispatch(getUser());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (users.length) {

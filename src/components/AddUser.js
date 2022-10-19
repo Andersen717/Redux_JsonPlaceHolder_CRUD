@@ -6,9 +6,9 @@ import { addUser } from "../redux/actions/userAction";
 import "./AddUser.css";
 
 const validateMessages = {
-  required: "${label} is required!",
+  required: "Field is required!",
   types: {
-    email: "${label} is not a valid email!",
+    email: "Please input a valid email!",
   },
 };
 
@@ -19,14 +19,13 @@ const AddUser = () => {
   const showModal = () => {
     setOpen(true);
   };
-  const handleOk = () => {
-    setOpen(false);
-  };
+  const handleOk = () => {};
   const handleCancel = () => {
     setOpen(false);
   };
   const onFinish = (form) => {
     dispatch(addUser(form));
+    setOpen(false);
   };
   return (
     <>
