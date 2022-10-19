@@ -1,14 +1,43 @@
 .edit-btn {
   background-color: #eeac57 !important;
   color:white !important;
+  outline-style: none !important;
   width: 120px;
   height: 40px !important;
 }
+.edit-btn:hover {
+  background-color: #dd9b46 !important;
+}
+.edit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 .delete-btn {
-  background-color: #D75452 !important;
+  background-color: #d75452 !important;
   color:white !important;
   width: 120px;
   height: 40px !important;
+}
+.delete-btn:hover {
+  background-color: #c64341 !important;
+}
+.modal-cancel-btn {
+  background-color: #616161 !important;
+  color:white !important;
+  width: 100px;
+  height: 40px !important;
+}
+.modal-cancel-btn:hover {
+  background-color: #505050 !important;
+}
+.modal-delete-btn {
+  background-color: #f14537 !important;
+  color:white !important;
+  width: 160px;
+  height: 40px !important;
+}
+.modal-delete-btn:hover {
+  background-color: #e03426 !important;
 }
 .card-content {
   display: flex;

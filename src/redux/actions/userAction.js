@@ -14,7 +14,7 @@ export const getUser = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: actionTypes.GET_ERRORS,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: err.response.data,
     });
   }
 };
@@ -33,7 +33,7 @@ export const addUser = (formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: actionTypes.GET_ERRORS,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: err.response.data,
     });
   }
 };
@@ -51,7 +51,7 @@ export const editUser = (formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: actionTypes.GET_ERRORS,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: err.response.data,
     });
   }
 };
@@ -70,7 +70,7 @@ export const deleteUser = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: actionTypes.GET_ERRORS,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: err.response.data,
     });
   }
 };

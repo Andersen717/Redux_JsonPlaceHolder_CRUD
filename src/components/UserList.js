@@ -102,6 +102,7 @@ const UserList = () => {
 
   const handleOk = (key) => {
     dispatch(deleteUser(key));
+    setEditingKey("");
     setIsModalOpen(false);
   };
 
@@ -213,7 +214,6 @@ const UserList = () => {
           </span>
         ) : (
           <Button
-            type="primary"
             disabled={editingKey !== ""}
             onClick={() => edit(record)}
             className="edit-btn"
@@ -232,7 +232,7 @@ const UserList = () => {
         return data.length >= 1 ? (
           <>
             <Button
-              className="delete-btn"
+              className="btn delete-btn"
               onClick={() => showDeleteModal(record.key)}
             >
               delete
@@ -242,6 +242,24 @@ const UserList = () => {
               open={isModalOpen && record.key === deletingKey}
               onOk={() => handleOk(record.key)}
               onCancel={handleCancel}
+              footer={[
+                <Button
+                  key="back"
+                  className="modal-cancel-btn"
+                  onClick={handleCancel}
+                >
+                  Cancel
+                </Button>,
+                <Button
+                  key="submit"
+                  className="modal-delete-btn"
+                  type="primary"
+                  loading={loading}
+                  onClick={() => handleOk(record.key)}
+                >
+                  Delete
+                </Button>,
+              ]}
             >
               <p>Are you sure delete this user?</p>
             </Modal>

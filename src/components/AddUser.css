@@ -1,4 +1,19 @@
 .submit-btn {
-  background-color: green !important;
+  background-color: #5fb760 !important;
+  color:white !important;
+  outline-style: none !important;
   margin-left: 10px;
+}
+.submit-btn:hover {
+  background-color: #4ea650 !important;
+}
+.add-btn {
+  background-color: #1477d5 !important;
+  color:white !important;
+  outline-style: none !important;
+  width: 160px;
+  height: 40px !important;
+}
+.add-btn:hover {
+  background-color: #0366c4 !important;
 }

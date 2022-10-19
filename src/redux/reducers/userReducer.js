@@ -1,4 +1,5 @@
 import * as actionTypes from "../types";
+import { message } from "antd";
 
 const initialState = {
   users: [],
@@ -49,6 +50,10 @@ const userReducer = (state = initialState, action) => {
         users: state.users.filter((user) => user.id !== payload),
         loading: false,
       };
+    case actionTypes.GET_ERRORS:
+      message.error(payload);
+      return state;
+
     default:
       return state;
   }

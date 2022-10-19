@@ -13,7 +13,6 @@ const validateMessages = {
 };
 
 const AddUser = () => {
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState();
   const dispatch = useDispatch();
 
@@ -31,7 +30,7 @@ const AddUser = () => {
   };
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button className="add-btn" onClick={showModal}>
         Add new
       </Button>
       <Modal
